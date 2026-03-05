@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Ye | Portfolio & Growth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #006680; }
+        body { background-color: #F5F5F3; color: #333; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .serif { font-family: 'Noto Serif SC', serif; }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.6); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .glass-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.03); }
+        .lang-active { color: var(--accent); font-weight: 700; border-bottom: 2px solid var(--accent); }
+        .metric-value { color: var(--accent); font-size: 2.5rem; font-weight: 700; line-height: 1; }
+        .masonry { column-count: 1; column-gap: 1.5rem; }
+        @media (min-width: 768px) { .masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry { column-count: 4; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
+        
+        /* Prompt 折叠逻辑修复 */
+        .prompt-content { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s ease; }
+        .prompt-open .prompt-content { max-height: 1500px; opacity: 1; margin-top: 1.5rem; }
+        .toggle-icon { transition: transform 0.3s; display: inline-block; }
+        .prompt-open .toggle-icon { transform: rotate(45deg); }
+        .pre-wrap { white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="p-6 md:p-8 flex justify-between items-center fixed top-0 w-full z-50 bg-[#F5F5F3]/80 backdrop-blur-md">
+        <div class="text-xl font-bold tracking-tighter text-[#006680]">BELLA.</div>
+        
+        <div class="hidden md:flex space-x-8 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-500">
+            <a href="#" id="tab-home" class="hover:text-[#006680] transition-colors">Home</a>
+            <a href="#section-work" id="tab-work" class="hover:text-[#006680] transition-colors">Experience</a>
+            <a href="#section-ai" id="tab-ai" class="hover:text-[#006680] transition-colors">AI Lab</a>
+            <a href="#section-vision" id="tab-vision" class="hover:text-[#006680] transition-colors">AIGC</a>
+        </div>
+
+        <div class="flex items-center space-x-8">
+            <div class="text-sm flex gap-4">
+                <span id="btn-zh" onclick="switchLang('zh')" class="cursor-pointer lang-active">ZH</span>
+                <span id="btn-en" onclick="switchLang('en')" class="cursor-pointer text-gray-400">EN</span>
+            </div>
+            <a href="叶瑜芊-用户增长/产品运营.pdf" download class="bg-[#006680] text-white px-5 py-2 rounded-full text-xs tracking-widest hover:bg-[#004d61] transition-all flex items-center gap-2">
+                <span id="nav-download">下载简历 / CV</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
+        
+        <section class="mb-32 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-3/5">
+                <h1 id="hero-title" class="text-5xl md:text-6xl serif mb-8 leading-tight text-[#006680]">你好, 我是 Bella</h1>
+
+                <div id="hero-tagline-block" class="mb-8 animate-breath">
+                    <p id="tagline-1" class="text-[11px] tracking-[0.3em] text-[#006680] font-bold uppercase mb-1">
+                        ENFJ / 内容创作者 / VIBE CODER
+                    </p>
+                    <p id="tagline-2" class="text-[11px] tracking-[0.3em] text-[#006680] font-bold uppercase">
+                        室内攀岩探索ING / 奶茶品鉴专家
+                    </p>
+                </div>
+</p>
+                <p id="hero-sub" class="text-xl text-gray-700 font-light mb-6">保持对世界的敏感，和对技术的绝对好奇。</p>
+            </div>
+            <div class="md:w-2/5 px-4">
+                <div class="aspect-[3/4] rounded-[3rem] overflow-hidden shadow-2xl bg-gray-200">
+                    <img src="IMG_5433.jpg" alt="Bella" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <section id="section-work" class="mb-32">
+            <h2 id="section-work-title" class="text-xs tracking-[0.4em] text-gray-400 uppercase mb-12 text-center">02 / 工作经历 (Experience)</h2>
+            <div class="space-y-12">
+                <div class="glass-card rounded-[2.5rem] p-10 md:p-14">
+                    <div class="flex flex-col md:flex-row justify-between gap-8">
+                        <div class="md:w-2/3">
+                            <span class="text-[#006680] text-xs font-bold tracking-widest uppercase mb-4 block">Content Operations & Growth</span>
+                            <h3 id="role-1" class="text-3xl font-bold mb-6">内容运营｜平安银行数字营销项目</h3>
+                            <p id="desc-1" class="text-gray-600 leading-relaxed text-lg font-light">
+                                通过自动化爬取竞品数据与市场调研进行需求洞察。在小红书等平台持续进行 A/B Test，指导和优化 KOS 矩阵账号创意内容。搭建了基于 Coze 的低代码工作流和自研 vibe coding 内容生产工具，提升创意内容产出效率 175%。
+                            </p>
+                        </div>
+                        <div class="md:w-1/3 flex flex-col justify-center gap-8 md:text-right">
+                            <div><div class="metric-value">56.8%</div><div id="m-1" class="text-[10px] text-gray-400 tracking-widest mt-2 uppercase">私信开口率</div></div>
+                            <div><div class="metric-value">1.47</div><div id="m-2" class="text-[10px] text-gray-400 tracking-widest mt-2 uppercase">整体 ROI</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-[2.5rem] p-10 md:p-14">
+                    <div class="flex flex-col md:flex-row justify-between gap-8">
+                        <div class="md:w-2/3">
+                            <span class="text-[#006680] text-xs font-bold tracking-widest uppercase mb-4 block">New Media Operations</span>
+                            <h3 id="role-2" class="text-3xl font-bold mb-6">新媒体运营｜品牌 0-1 营销体系搭建</h3>
+                            <p id="desc-2" class="text-gray-600 leading-relaxed text-lg font-light">
+                                通过深度用户访谈和竞品分析洞察 3-15 岁客群需求，策划品牌核心视觉与标准。利用 AI 工具实现 40% 提效，从 0-1 搭建 KOS 矩阵。结合爆文分析与达人策略，首月获取 1000+ 精准粉丝，使其成为 brand 核心增长渠道。
+                            </p>
+                        </div>
+                        <div class="md:w-1/3 flex flex-col justify-center gap-8 md:text-right">
+                            <div><div class="metric-value">1000+</div><div id="m-3" class="text-[10px] text-gray-400 tracking-widest mt-2 uppercase">首月精准获客</div></div>
+                            <div><div class="metric-value">20W+</div><div id="m-4" class="text-[10px] text-gray-400 tracking-widest mt-2 uppercase">单篇最高浏览量</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-ai" class="mb-32">
+            <h2 id="section-ai-title" class="text-xs tracking-[0.4em] text-gray-400 uppercase mb-12 text-center">03 / AI 实验室 (AI Laboratory)</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <a href="https://yeyuqian815-bella.github.io/my-snow-world/" target="_blank" class="glass-card p-12 rounded-[2.5rem] group">
+                    <span class="bg-[#006680] text-white text-[10px] px-3 py-1 rounded-full mb-6 inline-block uppercase tracking-widest">Live</span>
+                    <h3 id="lab-t1" class="text-4xl serif text-[#006680] mb-4">寂静雪夜</h3>
+                    <p id="lab-d1" class="text-gray-600 font-light mb-8">沉浸式交互网页，探索前端技术与情绪表达的融合。</p>
+                    <div id="lab-btn1" class="text-[#006680] font-bold">VIEW PROJECT →</div>
+                </a>
+                <div class="glass-card p-12 rounded-[2.5rem] opacity-80 border-dashed border-2 flex flex-col justify-center">
+                    <h3 id="lab-t2" class="text-3xl serif text-gray-500 mb-4">财语魔方</h3>
+                    <p id="lab-d2" class="text-gray-500 font-light italic">金融内容半自动化生产工具，系统优化中。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-prompt" class="mb-32">
+            <h2 id="section-prompt-title" class="text-xs tracking-[0.4em] text-gray-400 uppercase mb-12 text-center">04 / 指令工程 (Prompt Engineering)</h2>
+            <div class="space-y-6">
+                <div class="glass-card rounded-3xl overflow-hidden" onclick="this.classList.toggle('prompt-open')">
+                    <div class="p-8 flex justify-between items-center cursor-pointer">
+                        <h4 id="prompt-name1" class="font-bold text-[#006680]">「财语魔方」小红书理财专家</h4>
+                        <span class="toggle-icon text-2xl text-gray-400">+</span>
+                    </div>
+                    <div class="prompt-content px-8 pb-8">
+                        <div class="bg-white/50 p-6 rounded-2xl font-mono text-xs leading-relaxed text-gray-600 pre-wrap">你是「财语魔方」—— 一位专业的小红书理财类内容创作专家,深谙小红书平台的流量规则和年轻用户的阅读偏好,擅长创作具有爆款潜质的理财财经类种草笔记。
+
+你的核心能力包括:
+
+原创文案生成:根据用户提供的主题/关键词,创作吸睛的理财笔记
+
+爆款笔记改写:分析爆款笔记的成功要素,生成优化改写版本
+
+重要提示:你生成的文案内容必须是纯文本格式,不要使用任何markdown标记符号(如#号、*号、-号等),不要添加多余的空行,直接输出可以复制粘贴使用的文案内容。
+
+-
+
+功能一:原创文案生成
+
+当用户提供主题/关键词/想要表达的核心观点时,按以下标准创作:
+
+【标题创作标准】(20字符内)
+
+使用数字、emoji符号增强视觉冲击
+
+制造悬念、痛点共鸣或利益诱惑
+
+参考句式: "震惊!原来[理财方法]可以这样玩" "月入3k也能[理财目标]!我的[时间]逆袭" "别再[错误做法]了![正确方法]才是王道" "[数字]个[理财技巧],让你[具体收益]"
+
+【正文创作标准】(1000字符内)
+
+开头部分(100-150字符): 强烈的代入感,描述目标受众的痛点场景,用金句/反转/提问式开场,3秒抓住注意力。 示例:"姐妹们!以前的我月光,现在已经攒下了5万块!真的没开玩笑..."
+
+主体内容(700-800字符): 采用分点陈述,用序号/emoji分隔,每个要点包含具体方法+个人经历+实际数据。口语化表达,穿插具体数字和对比(如:从负债2万到存款5万)。避免专业术语,用大白话解释。
+
+结尾部分(100-150字符): 强化行动召唤如"赶紧试试!早试早赚!",互动引导如"你们还有什么理财好方法?评论区分享!",制造紧迫感如"现在开始还不晚,再不行动就..."。
+
+【语言风格要求】 真诚分享感像闺蜜聊天,适度夸张但不浮夸,多用感叹号、省略号营造情绪,短句为主节奏明快。避免说教和硬广,避免过度专业或学术化。
+
+【必备元素】 个人化故事/经历、具体数字/对比数据、实操性强的干货、3-5个emoji点缀、制造共鸣的痛点描述。
+
+【输出格式】 直接输出标题和正文,中间用一个空行分隔,不要添加"标题:"、"正文:"等标签,不要使用任何markdown格式符号。
+
+-
+
+功能二:爆款笔记改写
+
+当用户提供爆款笔记链接或完整文案时,按以下步骤处理:
+
+第一步:拆解爆款要素 分析标题的钩子类型(痛点/利益/好奇/从众)、数字符号运用、情绪价值点。 分析内容结构的开头引入方式、信息组织逻辑、节奏控制手法。 分析语言特征的高频词汇句式、情绪调动技巧、互动设计。 识别爆款基因:独特价值点(为什么用户会保存分享)、情绪共鸣点(打中了什么痛点)、传播驱动力(什么让人想转发)。
+
+第二步:生成改写版本 改写原则:保留核心爆款基因(如痛点角度、数据对比、情绪价值),更换具体案例和表述方式避免雷同,注入新的个人化元素和时效性内容,优化不足之处强化爆款潜质。
+
+【输出格式】 先用100-200字简要说明原笔记的爆款要素(标题钩子、核心卖点、情绪价值、可优化点),然后提供2-3个改写版标题备选,接着输出改写版正文(1000字符内),最后用50-100字说明改写亮点。注意:所有内容都用纯文本格式,不使用markdown符号,各部分之间用空行分隔即可。
+
+-
+
+内容安全准则: 不涉及具体理财产品推荐,避免绝对化收益承诺,强调风险提示和理性理财,符合平台社区规范。</div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-3xl overflow-hidden" onclick="this.classList.toggle('prompt-open')">
+                    <div class="p-8 flex justify-between items-center cursor-pointer">
+                        <h4 id="prompt-name2" class="font-bold text-[#006680]">消除小猪</h4>
+                        <span class="toggle-icon text-2xl text-gray-400">+</span>
+                    </div>
+                    <div class="prompt-content px-8 pb-8">
+                        <div class="bg-white/50 p-6 rounded-2xl font-mono text-xs leading-relaxed text-gray-600 pre-wrap">你是一名资深的前端逆向工程专家，具备设计系统思维。你需要帮我生成一个纯前端、无后端依赖的“定点清除小猪”注意力转移工具代码，用于帮助焦虑人群快速转移注意力，要求如下：
+
+一、技术栈要求
+
+仅使用 HTML+CSS+原生JavaScript 开发，禁止使用任何框架、插件、动画库，降低运行和调试难度。
+
+代码需适配手机端、电脑端主流浏览器（Chrome、Edge、Safari），自动响应不同屏幕尺寸。
+
+纯本地运行，不收集任何用户数据，不申请设备权限（如定位、相机），无广告、无外链。
+
+二、功能逻辑要求
+
+启动逻辑
+
+◦ 页面加载完成后 0.5秒内 自动运行，无需用户点击“开始”按钮。
+
+◦ 按 0.3秒间隔 依次随机生成12个小猪元素，元素仅出现在屏幕中间60%区域（左右各留20%边距，防止边缘点击不便）。
+
+交互逻辑
+
+◦ 仅支持单点点击操作：点击小猪元素，元素立即消失（延迟≤0.1秒），同步触发“啵”的轻量音效；点击空白区域无任何反馈。
+
+◦ 全部12个小猪消除后，页面中央弹出提示文字“完成啦，喘口气吧”，2秒后文字自动消失，页面自动重置为初始状态。
+
+◦ 支持中途退出：电脑端按 ESC键 直接退出，手机端点击屏幕边缘任意位置3次退出，退出无弹窗确认。
+
+参数可调整
+
+◦ 代码中需单独标注参数修改入口，包括：小猪数量、弹出间隔、元素大小、音效开关，方便后续手动微调。
+
+三、视觉设计要求
+
+小猪元素
+
+◦ 样式：极简线条勾勒，无复杂纹理，填充色为浅粉色（#FFEBEE），边框色#FFCDD2，无阴影效果。
+
+◦ 大小：手机端直径≤1cm，电脑端直径≤1.5cm，根据屏幕宽度自动适配。
+
+页面背景：纯白色（#FFFFFF），无任何图案、渐变、纹理。
+
+提示文字
+
+◦ 内容：“完成啦，喘口气吧”；字体：微软雅黑/苹方；字号：16号；颜色：#FF8A9A；居中显示。
+
+◦ 文字弹出时无动画，仅静态显示，2秒后自动隐藏。
+
+四、音效要求
+
+嵌入免费无版权的“啵”声音效（时长0.2秒，频率1000Hz，音色柔和无尖锐感），可调用freesound.org等开源平台的无版权音效链接，或用原生代码生成简单音效。
+
+仅在点击小猪时触发音效，工具启动、结束、退出时均无音效。
+
+五、代码交付要求
+
+代码结构清晰，添加详细中文注释，标注每个功能模块的作用（如元素生成函数、点击事件函数、退出函数）。
+
+输出完整可运行的代码，直接复制到HTML文件中即可打开使用，无需额外配置。
+
+优化代码冗余，确保页面加载时间≤2秒，运行无卡顿、无报错。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-vision" class="mb-32">
+            <h2 id="section-vision-title" class="text-xs tracking-[0.4em] text-gray-400 uppercase mb-12 text-center">05 / AIGC能力 (AIGC Ability)</h2>
+            
+            <div class="mb-16">
+                <h3 id="vis-sub1" class="text-2xl serif text-[#006680] mb-8 text-center">品牌设计 | Twinkle Talk</h3>
+                <div class="masonry">
+                    <div class="masonry-item glass-card overflow-hidden rounded-3xl"><img src="image_284f88.jpg" class="w-full"></div>
+                    <div class="masonry-item glass-card overflow-hidden rounded-3xl"><img src="IMG_5447.jpg" class="w-full"></div>
+                    <div class="masonry-item glass-card overflow-hidden rounded-3xl"><img src="IMG_5448.jpg" class="w-full"></div>
+                    <div class="masonry-item glass-card overflow-hidden rounded-3xl"><img src="IMG_5449.jpg" class="w-full"></div>
+                </div>
+            </div>
+
+            <div>
+                <h3 id="vis-sub2" class="text-2xl serif text-[#006680] mb-8 text-center">AI 视觉探索 | AI Visual Arts</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div id="cs-1" class="glass-card aspect-square rounded-2xl border-dashed border-2 flex items-center justify-center text-gray-300">Coming Soon</div>
+                    <div id="cs-2" class="glass-card aspect-square rounded-2xl border-dashed border-2 flex items-center justify-center text-gray-300">Coming Soon</div>
+                    <div id="cs-3" class="glass-card aspect-square rounded-2xl border-dashed border-2 flex items-center justify-center text-gray-300">Coming Soon</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-insights" class="mb-32">
+            <h2 id="section-insights-title" class="text-xs tracking-[0.4em] text-gray-400 uppercase mb-12 text-center">06 / 洞察与表达 (Insights & Expressions)</h2>
+            
+            <div class="mb-16">
+                <h3 id="insight-sub1" class="text-lg font-bold text-[#006680] mb-6 border-l-4 border-[#006680] pl-4">【关于vibe coding】</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="https://www.xiaohongshu.com/discovery/item/696f481b000000001a02509e?source=webshare&xhsshare=pc_web&xsec_token=AB0Vs1rP9HOlvKaftU2fWQw76uvdgINUDHA-2nOOOMBEQ=&xsec_source=pc_share" target="_blank" class="glass-card p-4 rounded-3xl flex gap-4 items-center group">
+                        <img src="image_c16da6.jpg" class="w-24 h-24 rounded-2xl object-cover shrink-0">
+                        <div>
+                            <h4 id="in-t1" class="font-bold text-sm mb-1 group-hover:text-[#006680]">0代码经验自用｜Vibe Coding全流程复盘</h4>
+                            <p id="in-d1" class="text-[10px] text-gray-400 line-clamp-2">纯文科生也能打破技术恐惧，实现产品落地</p>
+                        </div>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/discovery/item/697505550000000022032788?source=webshare&xhsshare=pc_web&xsec_token=ABh2Nv7JH19UO6g7ojiv0FQdRb_aWn0teW8g1zN7Un_Hs=&xsec_source=pc_share" target="_blank" class="glass-card p-4 rounded-3xl flex gap-4 items-center group">
+                        <img src="image_c170e6.jpg" class="w-24 h-24 rounded-2xl object-cover shrink-0">
+                        <div><h4 id="in-t2" class="font-bold text-sm mb-1 group-hover:text-[#006680]">效率神器！爆款仿写工作流攻略分享</h4><p id="in-d2" class="text-[10px] text-gray-400 line-clamp-2">DeepSeek × 飞书，打造高效内容引擎</p></div>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/discovery/item/697c3c810000000022033610?source=webshare&xhsshare=pc_web&xsec_token=AB0upcKPWtBpyq18E41k-gYBc__qMNxG3oLmMnI_fTvf0=&xsec_source=pc_share" target="_blank" class="glass-card p-4 rounded-3xl flex gap-4 items-center group">
+                        <img src="image_c16e21.jpg" class="w-24 h-24 rounded-2xl object-cover shrink-0">
+                        <div><h4 id="in-t3" class="font-bold text-sm mb-1 group-hover:text-[#006680]">Claude｜vibe coding创造一个寂静的雪夜</h4><p id="in-d3" class="text-[10px] text-gray-400 line-clamp-2">0代码经验vibe coder的第一个作品分享</p></div>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/discovery/item/69820ab80000000022038852?source=webshare&xhsshare=pc_web&xsec_token=AB7MXU0VI09SX66zw4Yxs9olMFtKlMY_kjbkjAjjS_RuQ=&xsec_source=pc_share" target="_blank" class="glass-card p-4 rounded-3xl flex gap-4 items-center group">
+                        <img src="image_c16de4.jpg" class="w-24 h-24 rounded-2xl object-cover shrink-0">
+                        <div><h4 id="in-t4" class="font-bold text-sm mb-1 group-hover:text-[#006680]">听后感分享｜《十字路口》koji访谈李凯文</h4><p id="in-d4" class="text-[10px] text-gray-400 line-clamp-2">如果上帝来安排，不一定会安排我，但是上帝如果还没指出一个谁的话，那我就把手举起来</p></div>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h3 id="insight-sub2" class="text-lg font-bold text-gray-400 mb-6 border-l-4 border-gray-300 pl-4 uppercase tracking-widest">【学生剧组碎碎念】</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="https://www.xiaohongshu.com/discovery/item/6526e01500000000220290de?source=webshare&xhsshare=pc_web&xsec_token=ABjSTTIPZfVfBSAEswAugBEhsWPYmYVBuvKO3EkUKr6RU=&xsec_source=pc_share" target="_blank" class="glass-card p-4 rounded-3xl flex gap-4 items-center group">
+                        <img src="image_c17167.png" class="w-24 h-24 rounded-2xl object-cover shrink-0">
+                        <div><h4 id="in-t5" class="font-bold text-sm mb-1 group-hover:text-[#006680]">第一次做同期录音这些坑不要踩</h4><p id="in-d5" class="text-[10px] text-gray-400 line-clamp-2">大学期间对于同期录音实践的经验分享</p></div>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/discovery/item/64cd25b9000000000b029b4c?source=webshare&xhsshare=pc_web&xsec_token=ABg_j-lYUQICue09uRQiqkfa46WwyzWor2fFcASYJUafs=&xsec_source=pc_share" target="_blank" class="glass-card p-4 rounded-3xl flex gap-4 items-center group">
+                        <img src="image_c171bd.jpg" class="w-24 h-24 rounded-2xl object-cover shrink-0">
+                        <div><h4 id="in-t6" class="font-bold text-sm mb-1 group-hover:text-[#006680]">在大学的第一部短片，这些坑不要踩</h4><p id="in-d6" class="text-[10px] text-gray-400 line-clamp-2">关于学生剧组的实践经验分享</p></div>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/discovery/item/610705e6000000000102d107?source=webshare&xhsshare=pc_web&xsec_token=ABzwp3lwCffPMxSxHClGvuyYhLYiv038aV48ldcnGXSuQ=&xsec_source=pc_share" target="_blank" class="glass-card p-4 rounded-3xl flex gap-4 items-center group">
+                       <img src="image_c171e0.jpg" class="w-24 h-24 rounded-2xl object-cover shrink-0">
+                        <div><h4 class="font-bold text-sm mb-1 group-hover:text-[#006680]">写影评用不好视听语言？四步扩充写作素材</h4><p class="text-[10px] text-gray-400 line-clamp-2">写不好影评的话，或许这篇笔记能帮到你～</p></div>
+                    </a>
+                    <a href="https://www.xiaohongshu.com/discovery/item/611d3a4c000000002103cdd1?source=webshare&xhsshare=pc_web&xsec_token=ABj5KFzk5yyl_m-JVqtv14eVjsOBJRtaaL95dopFtBvq8=&xsec_source=pc_share" target="_blank" class="glass-card p-4 rounded-3xl flex gap-4 items-center group">
+                        <img src="image_c17203.jpg" class="w-24 h-24 rounded-2xl object-cover shrink-0">
+                        <div><h4 class="font-bold text-sm mb-1 group-hover:text-[#006680]">校考面试怎么聊电影？以顾晓刚《春江水暖》为例</h4><p class="text-[10px] text-gray-400 line-clamp-2">一起来聊聊，我最爱的电影之一</p></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="pb-32 text-center">
+            <h2 id="section-contact" class="text-xs tracking-[0.4em] text-gray-400 uppercase mb-12">08 / 保持联络 (Connect)</h2>
+            <div class="flex justify-center gap-6 flex-wrap">
+                <div class="glass-card px-8 py-4 rounded-full text-[#006680] font-medium">WeChat: Msbells17th</div>
+                <div class="glass-card px-8 py-4 rounded-full text-[#006680] font-medium underline">Email: yeyuqian815@gmail.com</div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const data = {
+            zh: {
+                // Nav & Tabs
+                'tab-home': '首页', 'tab-work': '经历', 'tab-ai': '实验室', 'tab-vision': '视觉',
+                'nav-download': "下载简历 / CV",
+                // Hero
+                'hero-title': "你好, 我是 Bella",
+                'hero-tagline': "ENFJ/内容创作者/vibe coder/室内攀岩探索ing/奶茶品鉴专家",
+                'hero-sub': "保持对世界的灵敏嗅觉，和对技术的绝对好奇。",
+                // Sections
+                'section-work-title': "02 / 工作经历 (Experience)",
+                'section-ai-title': "03 / AI 实验室 (AI Laboratory)",
+                'section-prompt-title': "04 / 指令工程 (Prompt Engineering)",
+                'section-vision-title': "05 / AIGC能力 (AIGC Ability)",
+                'section-insights-title': "06 / 洞察与表达 (Insights & Expressions)",
+                'section-contact': "08 / 保持联络 (Connect)",
+                // Content
+                'role-1': "内容运营｜平安银行数字营销项目",
+                'desc-1': "通过自动化爬取竞品数据与市场调研进行需求洞察。在小红书等平台持续进行 A/B Test，指导和优化 KOS 矩阵账号创意内容。搭建了基于 Coze 的低代码工作流和自研 vibe coding 内容生产工具，提升创意内容产出效率 175%。",
+                'm-1': "私信开口率", 'm-2': "整体 ROI",
+                'role-2': "新媒体运营｜品牌 0-1 营销体系搭建",
+                'desc-2': "通过深度用户访谈和竞品分析洞察 3-15 岁客群需求，策划品牌核心视觉与标准。利用 AI 工具实现 40% 提效，从 0-1 搭建 KOS 矩阵。结合爆文分析与达人策略，首月获取 1000+ 精准粉丝，使其成为品牌核心增长渠道。",
+                'm-3': "首月精准获客", 'm-4': "单篇最高浏览量",
+                'lab-t1': "寂静雪夜", 'lab-d1': "沉浸式交互网页，探索前端技术与情绪表达的融合。", 'lab-btn1': "查看项目 →",
+                'lab-t2': "财语魔方", 'lab-d2': "金融内容半自动化生产工具，系统优化中。",
+                'prompt-name1': "「财语魔方」小红书理财专家", 'prompt-name2': "消除小猪",
+                'vis-sub1': "品牌设计 | Twinkle Talk", 'vis-sub2': "AI 视觉探索 | AI Visual Arts",
+                'cs-1': "敬请期待", 'cs-2': "敬请期待", 'cs-3': "敬请期待",
+                'insight-sub1': "【关于vibe coding】", 'insight-sub2': "【学生剧组碎碎念】"
+            },
+            en: {
+                // Nav & Tabs
+                'tab-home': 'HOME', 'tab-work': 'WORK', 'tab-ai': 'AI LAB', 'tab-vision': 'AIGC',
+                'nav-download': "Download Resume / CV",
+                // Hero
+                'hero-title': "Hi, I'm Bella Ye",
+                'hero-tagline': "ENFJ / Content Creator / Vibe Coder / Bouldering / Milk Tea Critic",
+                'hero-sub': "Keep keen to the world, stay curious to tech.",
+                // Sections
+                'section-work-title': "02 / Professional Experience",
+                'section-ai-title': "03 / AI Laboratory",
+                'section-prompt-title': "04 / Prompt Engineering",
+                'section-vision-title': "05 / AIGC Ability",
+                'section-insights-title': "06 / Insights & Expressions",
+                'section-contact': "08 / Let's Connect",
+                // Content
+                'role-1': "Content Ops | PingAn Bank Digital Marketing",
+                'desc-1': "Insight through automated data crawling and market research. Conducted A/B tests on platforms like Xiaohongshu to optimize KOS matrix content. Built Coze-based workflows and custom vibe coding tools, boosting creative efficiency by 175%.",
+                'm-1': "DM CONVERSION", 'm-2': "TOTAL ROI",
+                'role-2': "New Media Ops | 0-1 Brand Marketing",
+                'desc-2': "Identified needs for 3-15 age group via user interviews. Established brand visuals and KOS matrices using AI tools for 40% efficiency gain. Gained 1000+ targeted followers in month one.",
+                'm-3': "TARGETED USERS", 'm-4': "PEAK VIEWS",
+                'lab-t1': "Silent Snow Night", 'lab-d1': "Immersive interactive web exploring the fusion of front-end tech and emotion.", 'lab-btn1': "VIEW PROJECT →",
+                'lab-t2': "Finance Cube", 'lab-d2': "Semi-automated finance content tool. Optimizing...",
+                'prompt-name1': "Finance Cube Expert", 'prompt-name2': "Piggy Eraser",
+                'vis-sub1': "Brand Identity | Twinkle Talk", 'vis-sub2': "AI Visual Arts Exploration",
+                'cs-1': "Coming Soon", 'cs-2': "Coming Soon", 'cs-3': "Coming Soon",
+                'insight-sub1': "[About Vibe Coding]", 'insight-sub2': "[Crew Memoirs]"
+            }
+        };
+
+        function switchLang(lang) {
+            // 遍历 data 库中的所有 ID 并更新内容
+            for (let id in data[lang]) {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.innerText = data[lang][id];
+                }
+            }
+
+            // 更新切换按钮状态
+            document.getElementById('btn-zh').className = lang === 'zh' ? 'cursor-pointer lang-active' : 'cursor-pointer text-gray-400';
+            document.getElementById('btn-en').className = lang === 'en' ? 'cursor-pointer lang-active' : 'cursor-pointer text-gray-400';
+            
+            // 额外处理 html lang 属性
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        }
+    </script>
+</body>
+</html>
